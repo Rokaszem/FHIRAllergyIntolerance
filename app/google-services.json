@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "390538892020",
+    "project_id": "fhir-allergyintolerance",
+    "storage_bucket": "fhir-allergyintolerance.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:390538892020:android:4a9fcab14c07bbedda04a1",
+        "android_client_info": {
+          "package_name": "com.example.fhir_allergyintolerance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "390538892020-ipod9mcaqduab53b4ta0v98k862ls4mr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fhir_allergyintolerance",
+            "certificate_hash": "89877726d0053228aec1e00f8678975a664dcd36"
+          }
+        },
+        {
+          "client_id": "390538892020-pl3o3r6i391ek4nsjsepodtc3j5d4t9i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDB2YF1sb6b2woaDbEsVF1rSAZvF2Y7u0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "390538892020-pl3o3r6i391ek4nsjsepodtc3j5d4t9i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
