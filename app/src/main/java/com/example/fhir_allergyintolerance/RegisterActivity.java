@@ -33,6 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        mAuth=FirebaseAuth.getInstance();
 
 
         registerNameET = findViewById(R.id.registerUsername);
@@ -67,7 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void updateUI(FirebaseUser account){
         if(account != null){
-            Toast.makeText(this,"Signed in as"+account.getDisplayName(),Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Signed in as "+account.getEmail(),Toast.LENGTH_LONG).show();
             startActivity(new Intent(this,MainActivity.class));
         }else {
             Toast.makeText(this,"Error! Pleas try again.",Toast.LENGTH_LONG).show();

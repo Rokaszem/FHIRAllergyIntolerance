@@ -4,9 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -41,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     public void Login(View view) {
         String userName = userNameET.getText().toString();
         String userPassword = userPasswordET.getText().toString();
-        Intent intent = new Intent(this, PatientList.class);
+        Intent intent = new Intent(this, PatientListActivity.class);
 
         try {
             mAuth.signInWithEmailAndPassword(userName, userPassword).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

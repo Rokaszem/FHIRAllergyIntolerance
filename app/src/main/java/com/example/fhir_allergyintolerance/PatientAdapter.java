@@ -11,7 +11,6 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
@@ -104,7 +103,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
             itemView.findViewById(R.id.OpenPatient).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(v.getContext(),PatientDetail.class);
+                    Intent intent=new Intent(v.getContext(), PatientDetailActivity.class);
                     intent.putExtra("email",mEmailText.getText());
                     mContext.startActivity(intent);
                 }
@@ -123,12 +122,6 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
             }
         }
     }
-    /*
-    public void OpenPatientDetail(View view) {
-        Intent intent = new Intent(this, PatientDetail.class);
-        startActivity(intent);
-    }
-     */
 }
 
 

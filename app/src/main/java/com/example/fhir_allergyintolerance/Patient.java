@@ -1,6 +1,7 @@
 package com.example.fhir_allergyintolerance;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Patient {
     private String Name;
