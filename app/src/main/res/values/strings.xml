@@ -4,4 +4,5 @@
     <string name="password">Password</string>
     <string name="name">Name</string>
     <string name="age">Age</string>
+    <string name="delete">Delete</string>
 </resources>

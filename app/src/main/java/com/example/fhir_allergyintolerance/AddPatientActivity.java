@@ -49,6 +49,7 @@ public class AddPatientActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 Log.d(LOG_TAG, "Sikeres hozzáadás");
+                finish();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

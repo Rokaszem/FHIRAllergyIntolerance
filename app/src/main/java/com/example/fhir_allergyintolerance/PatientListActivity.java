@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ public class PatientListActivity extends AppCompatActivity {
 
     private CollectionReference mPatients;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
 
 
     @Override
@@ -38,18 +40,26 @@ public class PatientListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_list);
 
-        mRecyclerView=findViewById(R.id.PatientRecyclerView);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this,1));
-        mPatientsData=new ArrayList<>();
+        swipeRefreshLayout = findViewById(R.id.SRL);
 
-        mAdapter=new PatientAdapter(this, mPatientsData);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                recreate();
+            }
+        });
+
+        mRecyclerView = findViewById(R.id.PatientRecyclerView);
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 1));
+        mPatientsData = new ArrayList<>();
+
+        mAdapter = new PatientAdapter(this, mPatientsData);
         mRecyclerView.setAdapter(mAdapter);
 
         mPatients = FirebaseFirestore.getInstance().collection("Patient");
 
 
-
-        Log.d(LOG_TAG,"mPatients log "+ String.valueOf(mPatients));
+        Log.d(LOG_TAG, "mPatients log " + String.valueOf(mPatients));
         QueryData();
 
     }
@@ -58,19 +68,19 @@ public class PatientListActivity extends AppCompatActivity {
         mPatientsData.clear();
 
         mPatients.orderBy("name").get().addOnSuccessListener(queryDocumentSnapshots -> {
-            Log.d(LOG_TAG,"queryDocumentSnapshots");
-           for (QueryDocumentSnapshot document: queryDocumentSnapshots){
-               Patient p = new Patient(document.getString("name"),document.getString("email"), (int)Math.round(document.getDouble("age")));
-               mPatientsData.add(p);
-           }
-           if (mPatientsData.size()==0){
-               QueryData();
-           }
+            Log.d(LOG_TAG, "queryDocumentSnapshots");
+            for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                Patient p = new Patient(document.getString("name"), document.getString("email"), (int) Math.round(document.getDouble("age")));
+                mPatientsData.add(p);
+            }
+            if (mPatientsData.size() == 0) {
+                QueryData();
+            }
             mAdapter.notifyDataSetChanged();
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull @NotNull Exception e) {
-                Log.d(LOG_TAG, "Hiba oka: "+e.toString());
+                Log.d(LOG_TAG, "Hiba oka: " + e.toString());
             }
         });
 

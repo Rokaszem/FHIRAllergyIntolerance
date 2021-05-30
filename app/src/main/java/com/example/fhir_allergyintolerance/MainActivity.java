@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mAuth=FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         userNameET = findViewById(R.id.loginUsername);
         userPasswordET = findViewById(R.id.loginPassword);
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Failed login!", Toast.LENGTH_LONG).show();
                 }
             });
-        }catch (Exception e){
+        } catch (Exception e) {
             Toast.makeText(MainActivity.this, "User email and password required!", Toast.LENGTH_LONG).show();
         }
 
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void Register(View view){
+    public void Register(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }

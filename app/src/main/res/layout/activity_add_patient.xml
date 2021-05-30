@@ -49,35 +49,6 @@
         app:layout_constraintTop_toBottomOf="@+id/PatientEmailET"
         app:layout_constraintVertical_bias="0.1" />
 
-    <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="69dp"
-        app:layout_constraintBottom_toTopOf="@+id/AddPatientBTN"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PatientAgeET">
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp" />
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp" />
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp" />
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp" />
-    </LinearLayout>
-
     <Button
         android:id="@+id/AddPatientBTN"
         android:layout_width="wrap_content"
@@ -88,8 +59,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PatientAgeET"
-        app:layout_constraintVertical_bias="0.901" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.707" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

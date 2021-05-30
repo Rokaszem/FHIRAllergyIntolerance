@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FHIRAllergyIntolerance">
-        <activity android:name=".AllergyListActivity"></activity>
         <activity android:name=".AddPatientActivity" />
         <activity android:name=".PatientDetailActivity" />
         <activity android:name=".PatientListActivity" />

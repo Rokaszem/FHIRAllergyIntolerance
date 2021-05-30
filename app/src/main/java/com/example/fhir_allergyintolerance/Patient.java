@@ -1,12 +1,12 @@
 package com.example.fhir_allergyintolerance;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 public class Patient {
-    private String Name;
-    private String Email;
-    private int Age;
+    private String Name = "Name";
+    private String Email = "Email";
+    private int Age = 999;
     private ArrayList<String> Allergies;
 
     public Patient() {
@@ -56,6 +56,30 @@ public class Patient {
 
     public void setAllergies(ArrayList<String> allergies) {
         Allergies = allergies;
+    }
+
+    public void setAllergiesFromMap(Map m) {
+        Allergies = new ArrayList<String>(m.values());
+    }
+
+    public String allergiesToString() {
+        String ret = "";
+        if (Allergies != null) {
+            for (String st : Allergies) {
+                ret += st + ", ";
+            }
+        }
+        return ret;
+    }
+
+    public ArrayList<String> toAllergiesList(String st) {
+        ArrayList<String> ret = new ArrayList<String>();
+        for (String ss : st.split(",")) {
+            if (!ss.equals(" ")) {
+                ret.add(ss.trim().toLowerCase());
+            }
+        }
+        return ret;
     }
 
     @Override
