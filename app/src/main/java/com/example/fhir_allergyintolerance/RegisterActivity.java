@@ -1,5 +1,6 @@
 package com.example.fhir_allergyintolerance;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
@@ -17,23 +19,26 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.SignInMethodQueryResult;
 
-import lombok.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG=RegisterActivity.class.getName();
+    private static final String LOG_TAG = RegisterActivity.class.getName();
 
     EditText registerNameET;
     EditText registerPasswordET;
 
     private FirebaseAuth mAuth;
 
+    private String registerName;
+    private String registerPassword;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        mAuth=FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
 
         registerNameET = findViewById(R.id.registerUsername);
@@ -42,38 +47,28 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void NewRegister(View view) {
-        String registerName = registerNameET.getText().toString();
-        String registerPassword = registerPasswordET.getText().toString();
-        Log.i(LOG_TAG,registerName);
+        try {
+            registerName = registerNameET.getText().toString();
+            registerPassword = registerPasswordET.getText().toString();
 
-
-        mAuth.createUserWithEmailAndPassword(registerName,registerPassword)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
+            mAuth.createUserWithEmailAndPassword(registerName, registerPassword)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
                             Log.i(LOG_TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.i(LOG_TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegisterActivity.this, "Authentication failed.",Toast.LENGTH_SHORT).show();
-                            updateUI(null);
+                            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                         }
-                    }
-                });
-    }
-
-    public void updateUI(FirebaseUser account){
-        if(account != null){
-            Toast.makeText(this,"Signed in as "+account.getEmail(),Toast.LENGTH_LONG).show();
-            startActivity(new Intent(this,MainActivity.class));
-        }else {
-            Toast.makeText(this,"Error! Pleas try again.",Toast.LENGTH_LONG).show();
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@androidx.annotation.NonNull @NotNull Exception e) {
+                    Log.i(LOG_TAG, "createUserWithEmail:failure");
+                    Toast.makeText(RegisterActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }catch (Exception e){
+            Toast.makeText(RegisterActivity.this, "Failed registration!", Toast.LENGTH_SHORT).show();
         }
 
     }
-
 }

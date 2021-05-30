@@ -20,6 +20,8 @@ public class AddPatientActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = AddPatientActivity.class.getName();
 
+    private NotificationHandler notificationHandler;
+
     private CollectionReference mPatients;
 
     EditText pName;
@@ -37,6 +39,8 @@ public class AddPatientActivity extends AppCompatActivity {
         pAge=findViewById(R.id.PatientAgeET);
         pEmail=findViewById(R.id.PatientEmailET);
 
+        notificationHandler=new NotificationHandler(this);
+
     }
 
     public void AddPatient(View view) {
@@ -49,6 +53,7 @@ public class AddPatientActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 Log.d(LOG_TAG, "Sikeres hozzáadás");
+                notificationHandler.send("Patient added!", pName.getText().toString()+" added to the database.");
                 finish();
             }
         }).addOnFailureListener(new OnFailureListener() {

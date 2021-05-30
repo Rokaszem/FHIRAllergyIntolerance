@@ -10,6 +10,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
+import android.widget.ImageButton;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,6 +38,8 @@ public class PatientListActivity extends AppCompatActivity {
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
+    private ImageButton imageButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +57,12 @@ public class PatientListActivity extends AppCompatActivity {
 
         mRecyclerView = findViewById(R.id.PatientRecyclerView);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 1));
+
+        TranslateAnimation translateAnimation=new TranslateAnimation(-1200,0,0,0);
+        translateAnimation.setDuration(5000);
+        translateAnimation.setFillAfter(true);
+        mRecyclerView.startAnimation(translateAnimation);
+
         mPatientsData = new ArrayList<>();
 
         mAdapter = new PatientAdapter(this, mPatientsData);
@@ -61,6 +73,13 @@ public class PatientListActivity extends AppCompatActivity {
 
         Log.d(LOG_TAG, "mPatients log " + String.valueOf(mPatients));
         QueryData();
+
+        imageButton = findViewById(R.id.OpenAddPatientBTN);
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
+        alphaAnimation.setDuration(5000);
+        alphaAnimation.setRepeatCount(1);
+        alphaAnimation.setRepeatMode(Animation.REVERSE);
+        imageButton.startAnimation(alphaAnimation);
 
     }
 
